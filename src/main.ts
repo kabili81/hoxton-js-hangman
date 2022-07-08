@@ -44,7 +44,7 @@ function getWrongGuesses() {
 }
 
 function checkIfLost() {
-  const numberOfWrongGuesses = getWrongGuesses().length
+  let numberOfWrongGuesses = getWrongGuesses().length
   return numberOfWrongGuesses >= state.maxMistakes
 }
 
@@ -56,22 +56,22 @@ function checkIfWon() {
 
 
 function getRandomWord() {
-  const randomIndex = Math.floor(Math.random() * words.length)
+  let randomIndex = Math.floor(Math.random() * words.length)
   return words[randomIndex]
 }
 
 
 function renderWord() {
 
-  const wordEl = document.createElement('div')
+  let wordEl = document.createElement('div')
   wordEl.className = "word"
 
   
 
-  const rightGuesses = getRightGuesses()
+  let rightGuesses = getRightGuesses()
 
-  for (const letter of state.word) {
-    const letterEl = document.createElement('span')
+  for (let letter of state.word) {
+    let letterEl = document.createElement('span')
 
     if (rightGuesses.includes(letter)) {
       letterEl.textContent = letter
@@ -85,10 +85,10 @@ function renderWord() {
 }
 
 function renderWrongGuesses() {
-  const spanEl = document.createElement('span')
+  let spanEl = document.createElement('span')
   spanEl.setAttribute('class', 'wrong-guesses')
 
-  const wrongGuesses = getWrongGuesses()
+  let wrongGuesses = getWrongGuesses()
   spanEl.textContent = `Wrong guesses: ${wrongGuesses.join(',')} (${
     wrongGuesses.length
   })`
@@ -97,18 +97,18 @@ function renderWrongGuesses() {
 }
 
 function renderWinOrLostMessage() {
-  const lost = checkIfLost()
-  const won = checkIfWon()
+  let lost = checkIfLost()
+  let won = checkIfWon()
 
   if (!lost && !won) return
 
   if (lost) {
-    const lostSection = document.createElement('div')
+    let lostSection = document.createElement('div')
 
-    const messageEl = document.createElement('span')
+    let messageEl = document.createElement('span')
     messageEl.textContent = 'Sorry, you lost🤕'
 
-    const restartButton = document.createElement('button')
+    let restartButton = document.createElement('button')
     restartButton.textContent = 'RESTART'
     restartButton.addEventListener('click', function () {
       state.word = getRandomWord()
@@ -121,12 +121,12 @@ function renderWinOrLostMessage() {
   }
 
   if (won) {
-    const winSection = document.createElement('div')
+    let winSection = document.createElement('div')
 
-    const messageEl = document.createElement('span')
+    let messageEl = document.createElement('span')
     messageEl.textContent = 'Yes you win 🎉'
 
-    const restartButton = document.createElement('button')
+    let restartButton = document.createElement('button')
     restartButton.textContent = 'RESTART'
     restartButton.addEventListener('click', function () {
       state.word = getRandomWord()
@@ -185,9 +185,9 @@ function listenForKeypresses() {
   // Every time a letter is pressed, do something
   document.addEventListener('keypress', function (event) {
     // if the key pressed is not already guessed
-    const haventLost = !checkIfLost()
-    const haventWon = !checkIfWon()
-    const keyIsNotAlreadyGuessed = !state.characters.includes(event.key)
+    let haventLost = !checkIfLost()
+    let haventWon = !checkIfWon()
+    let keyIsNotAlreadyGuessed = !state.characters.includes(event.key)
 
     if (keyIsNotAlreadyGuessed && haventLost && haventWon) {
       // add it to the guesses
